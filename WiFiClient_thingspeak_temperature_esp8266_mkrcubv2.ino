@@ -42,24 +42,22 @@ void loop() {
   float sensorVal = analogRead(sensorPin); //read and store the sensor value
   delay(1000);
   Serial.print("sensorVal: ");
-      Serial.print(sensorVal);
-  /*float temp = (535 * .251);
-  Serial.print("temp: ");
-      Serial.println(temp);*/
+  Serial.print(sensorVal);
+  
   temperatureVoltageVal=(sensorVal / 1024) * 5.0;
-      Serial.print("        temperatureVoltageVal: ");
-      Serial.print(temperatureVoltageVal);
+  
+  Serial.print("        temperatureVoltageVal: ");
+  Serial.print(temperatureVoltageVal);
+  
   temperatureDegCelcVal=(temperatureVoltageVal-0.5) * 10;
-        Serial.print("        temperatureDegCelcVal: ");
-    Serial.println(temperatureDegCelcVal);
-  //sensorVal=temperatureDegCelcVal;
   
-  
-  
+  Serial.print("        temperatureDegCelcVal: ");
+  Serial.println(temperatureDegCelcVal);
+
   // wait till 15 seconds has passed before sending to the server
   timePassed++;
+  
   if(timePassed >= 15){
-    
     sendData(temperatureDegCelcVal);
     // reset this to count each of the seconds until it hits 15 again
     timePassed = 0;
