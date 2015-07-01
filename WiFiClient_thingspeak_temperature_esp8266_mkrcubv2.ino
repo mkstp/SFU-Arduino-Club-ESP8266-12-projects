@@ -5,10 +5,10 @@
 
 #include <ESP8266WiFi.h>
 
-const char* ssid     = "54AC45";
-const char* password = "266577216";
+const char* ssid     = "........";
+const char* password = ".............";
 const char* host = "api.thingspeak.com";
-String writeAPIKey = "ZVC0EZ1UXTKCWW1H";
+String writeAPIKey = "....................";
 const int sensorPin = A0; //ADC pin connected to analog sensor
 float temperatureVoltageVal=0.0;
 float temperatureDegCelcVal=0.0;
