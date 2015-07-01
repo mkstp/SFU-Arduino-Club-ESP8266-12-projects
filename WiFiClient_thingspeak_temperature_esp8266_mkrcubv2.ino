@@ -1,6 +1,7 @@
 /*
  *  This sketch sends data via HTTP to thingspeak service.
- *  By Marc St. Pierre, Tomoe yoshihara, Tim Kong
+ *  Make sure to update your ssid, password, and writeAPIKey in the entry fields
+ *  By Marc St. Pierre, Tomoe Yoshihara, Tim Kong
  */
 
 #include <ESP8266WiFi.h>
