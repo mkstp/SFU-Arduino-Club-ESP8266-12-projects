@@ -14,8 +14,8 @@ String writeAPIKey      = ".................";
 String thingtweetAPIKey = ".................";
 const int sensorPin     = A0; //ADC pin connected to an analog sensor
 int temperatureCheck[]  = {0, 0}; //this list allows you to compare before and after values
-int timePassed          = 0;
-int tweettimePassed     = 15; //offset time intervals to ensure that we don't send the tweet and sensor data at the same time
+int timePassed          = 15;
+int tweettimePassed     = 0; //offset time intervals to ensure that we don't send the tweet and sensor data at the same time
 WiFiClient client;
 
 void setup() {
@@ -53,8 +53,8 @@ void loop() {
     timePassed = 0;    
   }
   
-  //we check every hour to see if the temperature has changed. If so, we tweet it
-  if(tweettimePassed >= 3600){
+  //we check to see if the temperature has changed. If so, we tweet it
+  if(tweettimePassed >= 300){
     if(temperatureCheck[0] < temperatureCheck[1]){
       String notification = "Hotter from: ";
       notification       += String(temperatureCheck[0]);
@@ -63,6 +63,7 @@ void loop() {
       notification       += " degrees Celcius.";
       updateTwitterStatus(notification);
       Serial.println("Hot notification sent");
+      temperatureCheck[0] = temperatureCheck[1];
       
     }else if(temperatureCheck[0] > temperatureCheck[1]){
       String notification = "Colder from: ";
@@ -72,18 +73,13 @@ void loop() {
       notification       += " degrees Celcius.";
       updateTwitterStatus(notification);
       Serial.println("Cold notification sent");
+      temperatureCheck[0] = temperatureCheck[1];
       
     }else{
       Serial.println("Value unchanged");
     }
     // reset this to count each of the seconds until it hits the time limit again
     tweettimePassed = 0;
-    Serial.println("");
-    Serial.print("Temperature before: ");
-    Serial.print(temperatureCheck[0]);
-    Serial.print(" after: ");
-    Serial.println(temperatureCheck[1]);
-    temperatureCheck[0] = temperatureCheck[1];
   }
 }
 
